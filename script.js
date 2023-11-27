@@ -39,8 +39,20 @@ function generatePassword() {
   // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
   // WHEN I answer each prompt
   // THEN my input should be validated and at least one character type should be selected
+  let includeLower;
+  let includeUpper;
+  let includeNumeric;
+  let includeSpecial;
+  do {
+    includeLower = confirm("Include lowercase letters");
+    includeUpper = confirm("Include uppercase letters");
+    includeNumeric = confirm("Include numbers");
+    includeSpecial = confirm("Include special characters");
+    if (!(includeLower || includeUpper || includeNumeric || includeSpecial)) {
+      alert("You must select at least one character type");
+    }
+  } while (!(includeLower || includeUpper || includeNumeric || includeSpecial));
+
   // WHEN all prompts are answered
   // THEN a password is generated that matches the selected criteria
-  // WHEN the password is generated
-  // THEN the password is either displayed in an alert or written to the page
 }
