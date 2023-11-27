@@ -32,25 +32,29 @@ function generatePassword() {
     } else if (passwordLength < 8 || passwordLength > 128) {
       alert("Please enter a number between 8 and 128.");
     }
-    // Keep prompting until they give an appropriate value
+    // Keep prompting until the user gives an appropriate value
   } while (Number.isNaN(passwordLength) || !Number.isInteger(passwordLength) || passwordLength < 8 || passwordLength > 128);
 
   // WHEN asked for character types to include in the password
   // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
   // WHEN I answer each prompt
   // THEN my input should be validated and at least one character type should be selected
+  // Get character type preferences from user:
   let includeLower;
   let includeUpper;
   let includeNumeric;
   let includeSpecial;
   do {
+    // Confirm with the user which character types should be used
     includeLower = confirm("Include lowercase letters");
     includeUpper = confirm("Include uppercase letters");
     includeNumeric = confirm("Include numbers");
     includeSpecial = confirm("Include special characters");
+    // Inform the user if there is a problem with their input
     if (!(includeLower || includeUpper || includeNumeric || includeSpecial)) {
       alert("You must select at least one character type");
     }
+    // Keep prompting until the user selects at least one character type
   } while (!(includeLower || includeUpper || includeNumeric || includeSpecial));
 
   // WHEN all prompts are answered
