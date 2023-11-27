@@ -1,3 +1,9 @@
+// Constants
+const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const NUMERIC = "0123456789"
+const SPECIAL = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"   /* as listed at https://owasp.org/www-community/password-special-characters */
+
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
@@ -13,12 +19,8 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// Generate password
+// Generate password based on user input
 function generatePassword() {
-  // WHEN prompted for password criteria
-  // THEN I select which criteria to include in the password
-  // WHEN prompted for the length of the password
-  // THEN I choose a length of at least 8 characters and no more than 128 characters
   // Get the password length from the user:
   let passwordLength;
   do {
@@ -35,10 +37,8 @@ function generatePassword() {
     // Keep prompting until the user gives an appropriate value
   } while (Number.isNaN(passwordLength) || !Number.isInteger(passwordLength) || passwordLength < 8 || passwordLength > 128);
 
-  // WHEN asked for character types to include in the password
-  // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
-  // WHEN I answer each prompt
-  // THEN my input should be validated and at least one character type should be selected
+
+
   // Get character type preferences from user:
   let includeLower;
   let includeUpper;
@@ -57,6 +57,22 @@ function generatePassword() {
     // Keep prompting until the user selects at least one character type
   } while (!(includeLower || includeUpper || includeNumeric || includeSpecial));
 
-  // WHEN all prompts are answered
-  // THEN a password is generated that matches the selected criteria
+
+
+  // Generate and return a password based on user input:
+  let generatedPassword = "";
+  let characterPalette = "";
+
+  // Add the user-selected character types to the character palette
+  characterPalette = includeLower ? characterPalette + LOWERCASE : characterPalette;
+  characterPalette = includeUpper ? characterPalette + UPPERCASE : characterPalette;
+  characterPalette = includeNumeric ? characterPalette + NUMERIC : characterPalette;
+  characterPalette = includeSpecial ? characterPalette + SPECIAL : characterPalette;
+
+  // Pick random characters from the character palette and add them to the generated password until length is satisfied
+  for (let i = 0; i < passwordLength; i++) {
+    generatedPassword = generatedPassword + characterPalette.charAt(Math.floor(Math.random() * characterPalette.length));
+  }
+
+  return generatedPassword;
 }
