@@ -25,7 +25,15 @@ function generatePassword() {
   let passwordLength;
   do {
     // Prompt the user for their input (and cast as a number)
-    passwordLength = +prompt("Choose a password length (enter a number between 8 and 128):");
+    passwordLength = prompt("Choose a password length (enter a number between 8 and 128):");
+    // Check if the user hit the 'cancel' button
+    if (passwordLength === null) {
+      // If so, exit
+      return ""
+    } else {
+      // Else, cast the passwordLength to a number
+      passwordLength = +passwordLength;
+    }
     // Inform the user if there is a problem with their input
     if (Number.isNaN(passwordLength)) {
       alert("Please enter a number.");
